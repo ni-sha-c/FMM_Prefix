@@ -1,0 +1,1 @@
+Non-adaptive FMM in 2D written in Julia, as a parallel prefix algorithm.
