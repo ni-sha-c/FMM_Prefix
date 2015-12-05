@@ -2,14 +2,16 @@ module fmmcall
 
 include("fmm.jl")
 include("quadtree.jl")
+export pos
 
 N = 10
-s = 5
 q = rand(N,1)
 pos = rand(N,1) + im*rand(N,1)
 phi_direct = rand(N,1) + im*rand(N,1)
 phi_fmm = rand(N,1) + im*rand(N,1)
 box_numbers = quadtree.sort_into_boxes(pos)
+
+FMM.compute_multipole_expansions(q,pos)
 
 function direct_eval()
 	for i = 1:N

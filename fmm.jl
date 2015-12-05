@@ -2,6 +2,7 @@ module FMM
   
 
 import PyPlot
+include("quadtree.jl")
 
 s = 5
 
@@ -13,7 +14,10 @@ Expansion Centred Around Child Box (with
 centre z2 and s-term local expansion in B)
 
 """
-function LL_Translate(A,B,z1,z2)
+function LL_Translate(A::Array{Complex{Float64},2}
+					,B::Array{Complex{Float64},2},
+					z1::Complex{Float64},
+					z2::Complex{Float64})
 	
 	z0 = z1 - z2
 	for l=1:s+1
@@ -42,7 +46,11 @@ Around Box (with centre z2
 and s-term local expansion in B)
 
 """
-function ML_Translate(A,B,z1,z2)
+function ML_Translate(A::Array{Complex{Float64},2}
+					,B::Array{Complex{Float64},2},
+					z1::Complex{Float64},
+					z2::Complex{Float64})
+
 
 	z0 = z1 - z2
 	B[1] += A[1]*log(-z0) + sum(A[2:(s+1)].*((-1/z0).^((1:s)')))
@@ -83,7 +91,17 @@ function MM_Translate(A,B,z1,z2)
 
 end
 
+"""
+Computes Multipole Expansions About
+Box Centres At the Finest Level
 
+"""
+function compute_multipole_expansions(q,pos)
+
+					
+		
+
+end
 
 """
 Finds factorials for small numbers
