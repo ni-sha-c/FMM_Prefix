@@ -5,7 +5,7 @@ import PyPlot
 include("quadtree.jl")
 
 s = 5
-
+maxpart = 10
 """
 Performs Translation of Local Expansion 
 Centred Around Parent Box (with centre z1
@@ -96,11 +96,23 @@ Computes Multipole Expansions About
 Box Centres At the Finest Level
 
 """
-function compute_multipole_expansions(q,pos)
+function compute_multipole_expansions(q::Array{Float64,2},
+		pos::Array{Complex{Float64},2},
+		box_numbers::Array{Int64,2},
+		M_finest_level::Array{Array{Complex{Float64},1},1})
+	
+	particles_in_box = zeros(Int64, size(M_finest_level,1), maxpart)
+	nboxes = size(M_finest_level,1)
+	count = ones(Int32,size(M_finest_level,1))
+	for i = 1:length(q)
+		M_finest_level[box_numbers[i]][1] += q[i]
+		particles_in_box[box_numbers[i],count[box_numbers[i]]] = i
+		count[i] += 1
+	end
+	for i = 1:nboxes
+		M_finest_level[i][2:	
 
-					
-		
-
+	end
 end
 
 """

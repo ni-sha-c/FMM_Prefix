@@ -7,11 +7,8 @@ export pos
 N = 10
 q = rand(N,1)
 pos = rand(N,1) + im*rand(N,1)
-phi_direct = rand(N,1) + im*rand(N,1)
-phi_fmm = rand(N,1) + im*rand(N,1)
-box_numbers = quadtree.sort_into_boxes(pos)
-
-FMM.compute_multipole_expansions(q,pos)
+phi_direct = complex(zeros(N))
+phi_fmm = complex(zeros(N))
 
 function direct_eval()
 	for i = 1:N
@@ -25,12 +22,19 @@ function direct_eval()
 	return real(phi_direct)
 end
 
-
-
-
-
 function fmm_eval()
 
+	box_numbers = quadtree.sort_into_boxes(pos)
+	quadtree.initialize()
+	M_finest_level = Array(Array{Complex{Float64},1},
+			4^(quadtree.levels-1))
+	[M_finest_level[i]=quadtree.tree[end,i].M 
+	for i=1:4^(quadtree.levels-1)]
+
+
+	FMM.compute_multipole_expansions(q,pos,box_numbers,
+							M_finest_level)
+	
 				
 end
 

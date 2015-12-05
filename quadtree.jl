@@ -29,11 +29,13 @@ function initialize()
 	end
 end
 function sort_into_boxes(pos)
-		
-	 xpos = ceil(Int64,real(pos).*(2^levels))
-	 ypos = ceil(Int64,imag(pos).*(2^levels))
 
-	 boxnum = xpos + (2^levels).*(ypos-1)
+	 n = 2^(levels-1)
+		
+	 xpos = ceil(Int64,real(pos).*n)
+	 ypos = ceil(Int64,imag(pos).*n)
+
+	 boxnum = xpos + n.*(ypos-1)
 	 return boxnum
 	
 end
