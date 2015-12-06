@@ -11,7 +11,7 @@ phi_fmm = complex(zeros(N))
 
 #Set up fmm infrastructure
 levels = 4
-tree = Array(quadtree.box,levels,4^(levels-1))
+tree = Array(fmmcall.quadtree.box,levels,4^(levels-1))
 phi_direct = fmmcall.direct_eval(pos,q)
-
+phi_fmm = fmmcall.fmm_eval(tree,q,pos)
 

@@ -25,8 +25,9 @@ function initialize(tree::Array{box,2},
 		end
 	end
 end
-function sort_into_boxes(pos)
-	global levels
+function sort_into_boxes(
+		pos::Array{Complex{Float64},2},
+		levels::Int64)
 	 n = 2^(levels-1)
 		
 	 xpos = ceil(Int64,real(pos).*n)

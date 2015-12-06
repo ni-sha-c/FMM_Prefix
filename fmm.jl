@@ -116,8 +116,6 @@ function compute_multipole_expansions(q::Array{Float64,2},
 		pos[particles_in_box[i,1:count[i]-1]]'./(1:(s-1))
 		end
 	end
-	println(M_finest_level)
-#	println(count)
 end
 
 """
