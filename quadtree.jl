@@ -1,13 +1,7 @@
 module quadtree
 
-global tree,levels,boxes
-export tree
-levels = 4
-boxes  = 0
 s = 5
-for i = 0:levels-1
-		boxes += 4^i
-end
+
 immutable box 
 	M::Array{Complex{Float64},1}
 	L::Array{Complex{Float64},1}
@@ -19,9 +13,12 @@ box() = box( complex(zeros(s)),
 				 complex(zeros(s)),
 				 0.0 + 0.0im)
 
-tree = Array(box,levels,boxes)
-function initialize()
-	global tree, levels, boxes 
+
+function initialize(tree::Array{box,2}, 
+			levels::Int64)
+
+	boxes = 4^(levels-1)
+	
 	for i = 1:levels
 		for j =1:boxes
 			tree[i,j] = box()
@@ -29,11 +26,13 @@ function initialize()
 	end
 end
 function sort_into_boxes(pos)
+	global levels
+	 n = 2^(levels-1)
 		
-	 xpos = ceil(Int64,real(pos).*(2^levels))
-	 ypos = ceil(Int64,imag(pos).*(2^levels))
+	 xpos = ceil(Int64,real(pos).*n)
+	 ypos = ceil(Int64,imag(pos).*n)
 
-	 boxnum = xpos + (2^levels).*(ypos-1)
+	 boxnum = xpos + n.*(ypos-1)
 	 return boxnum
 	
 end
