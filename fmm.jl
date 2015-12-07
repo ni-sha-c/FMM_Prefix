@@ -46,8 +46,8 @@ Around Box (with centre z2
 and s-term local expansion in B)
 
 """
-function ML_Translate(A::Array{Complex{Float64},2}
-					,B::Array{Complex{Float64},2},
+function ML_Translate(A::Array{Complex{Float64},1}
+					,B::Array{Complex{Float64},1},
 					z1::Complex{Float64},
 					z2::Complex{Float64})
 
@@ -75,12 +75,15 @@ Around Parent Box (with centre z2
 and s-term local expansion in B)
 
 """
-function MM_Translate(A,B,z1,z2)
+function MM_Translate(A::Array{Complex{Float64},1}
+		,B::Array{Complex{Float64},1},
+		z1::Complex{Float64}
+		,z2::Complex{Float64})
 	
 	z0 = z1 - z2
 	B[1] += A[1]
 	
-	for l=1:s
+	for l=1:s-1
 		B[l+1] += -(A[1]/l)*(z0^l)
 		for k=1:l
 			B[l+1] += (A[k+1]*(z0^(l-k))
